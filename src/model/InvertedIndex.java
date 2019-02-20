@@ -72,8 +72,33 @@ public class InvertedIndex {
         return list;
     }
     
-    public ArrayList<Document> search (String query){
+    public ArrayList<Posting> search(String query){
+        // buat index/dictionary
+        makeDictionary();
+        String tempQuery[] = query.split(" ");
+        for (int i = 0; i < tempQuery.length; i++) {
+            String string = tempQuery[i];
+            
+        }
+        return null;
+    }
+    //belom kelar, nyari 2 kata.
+    public ArrayList<Posting> intersection(ArrayList<Posting> p1,
+            ArrayList<Posting> p2){
+        return null;
+    }
+    
+    public ArrayList<Posting> searchOneWord(String word){
+        Term tempTerm = new Term (word);
+        if(getDictionary().isEmpty()){
+            //dictionary kosong
+            return null;
+        }
+        else{
+            int positionTerm = Collections.binarySearch(dictionary, tempTerm);
+            return dictionary.get(positionTerm).getPostingList();
         
+        }
     }
     
     public void makeDictionary(){
