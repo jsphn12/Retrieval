@@ -16,7 +16,7 @@ import model.Term;
  *
  * @author admin
  */
-public class testDocument6 {
+public class testDocument7 {
 
     public static void main(String[] args) {
         // seting dokumen
@@ -30,18 +30,20 @@ public class testDocument6 {
         index.addNewDocument(doc1);
         index.addNewDocument(doc2);
         index.addNewDocument(doc3);
-        // panggil fungsi make dictionary
-        index.makeDictionary();
-        // panggil term yang ada dan jumlah posting
-        for (int i = 0; i < index.getDictionary().size(); i++) {
-            Term tempTerm = index.getDictionary().get(i);
-            System.out.println(tempTerm.getTerm()+","
-                    +tempTerm.getNumberOfDocument());
-            for (int j = 0; j < tempTerm.getNumberOfDocument(); j++) {
-                Posting tempPosting = tempTerm.getPostingList().get(j);
-                Document tempDoc = tempPosting.getDocument();
-                System.out.println("idDoc = "+tempDoc.getId());
-            }
+        // panggil fungsi search
+        ArrayList<Document> result = index.search("machine");
+        // tampilkan isi document dan id-nya
+        for (int i = 0; i < result.size(); i++) {
+            System.out.println("id_doc = " +result.get(i).getId());
+            System.out.println(result.get(i).getContent());
+        }
+        
+        // panggil fungsi search
+        ArrayList<Document> result1 = index.search("machine organization");
+        // tampilkan isi document dan id-nya
+        for (int i = 0; i < result1.size(); i++) {
+            System.out.println("id_doc = " +result1.get(i).getId());
+            System.out.println(result1.get(i).getContent());
         }
         
     }

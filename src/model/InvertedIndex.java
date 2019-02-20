@@ -72,6 +72,10 @@ public class InvertedIndex {
         return list;
     }
     
+    public ArrayList<Document> search (String query){
+        
+    }
+    
     public void makeDictionary(){
         // buat posting list term terurut
         ArrayList<Posting> list = getSortedPostingList();
