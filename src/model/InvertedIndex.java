@@ -91,6 +91,7 @@ public class InvertedIndex {
         ArrayList<Posting> posting = new ArrayList<>();
         int index_post1 = 0;
         int index_post2 = 0;
+        
 
         Posting posting1 = p1.get(index_post1);
         Posting posting2 = p2.get(index_post2);
