@@ -32,7 +32,7 @@ public class testDocument8 {
         index.addNewDocument(doc3);
         // panggil fungsi search
         index.makeDictionary();
-        ArrayList<Posting> result = index.searchOneWord("computer");
+        ArrayList<Posting> result = index.searchOneWord("machine");
         // panggil fungsi search
         ArrayList<Posting> result1 = index.searchOneWord("architecture");
         // pangging fungsi instersect

@@ -89,34 +89,34 @@ public class InvertedIndex {
         }
         
         ArrayList<Posting> posting = new ArrayList<>();
-        int index_p1 = 0;
-        int index_p2 = 0;
+        int index_post1 = 0;
+        int index_post2 = 0;
 
-        Posting post1 = p1.get(index_p1);
-        Posting post2 = p2.get(index_p2);
+        Posting posting1 = p1.get(index_post1);
+        Posting posting2 = p2.get(index_post2);
 
         while (true) {
-            if (post1.getDocument().getId() == post2.getDocument().getId()) {
+            if (posting1.getDocument().getId() == posting2.getDocument().getId()) {
                 try {
-                    posting.add(post1);
-                    index_p1++;
-                    index_p2++;
-                    post1 = p1.get(index_p1);
-                    post2 = p2.get(index_p2);
+                    posting.add(posting1);
+                    index_post1++;
+                    index_post2++;
+                    posting1 = p1.get(index_post1);
+                    posting2 = p2.get(index_post2);
                 } catch (Exception e) {
                     break;
                 }
-            } else if (post1.getDocument().getId() < post2.getDocument().getId()) {
+            } else if (posting1.getDocument().getId() < posting2.getDocument().getId()) {
                 try {
-                    index_p1++;
-                    post1 = p1.get(index_p1);
+                    index_post1++;
+                    posting1 = p1.get(index_post1);
                 } catch (Exception e) {
                     break;
                 }
             } else {
                 try {
-                    index_p2++;
-                    post2 = p2.get(index_p2);
+                    index_post2++;
+                    posting2 = p2.get(index_post2);
                 } catch (Exception e) {
                     break;
                 }
