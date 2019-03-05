@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 /**
@@ -12,6 +7,7 @@ package model;
 public class Posting implements Comparable<Posting>{
     private String term;
     private Document document;
+    private int numberOfTerm = 1;
     
     
     public Posting(Document document) {
@@ -55,6 +51,20 @@ public class Posting implements Comparable<Posting>{
     @Override
     public int compareTo(Posting posting) {
         return term.compareToIgnoreCase(posting.getTerm());
+    }
+
+    /**
+     * @return the numberOfTerm
+     */
+    public int getNumberOfTerm() {
+        return numberOfTerm;
+    }
+
+    /**
+     * @param numberOfTerm the numberOfTerm to set
+     */
+    public void setNumberOfTerm(int numberOfTerm) {
+        this.numberOfTerm = numberOfTerm;
     }
     
 }
