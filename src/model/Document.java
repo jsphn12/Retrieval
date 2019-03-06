@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
  *
  * @author puspaningtyas
  */
-public class Document {
+public class Document implements Comparable<Document>{
 
     private int id;
     private String content;
@@ -102,5 +102,10 @@ public class Document {
             }
         }
         return result;
-}
+    }
+
+    @Override
+    public int compareTo(Document doc) {
+        return id-doc.getId();
+    }
 }

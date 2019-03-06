@@ -8,7 +8,7 @@ public class Posting implements Comparable<Posting>{
     private String term;
     private Document document;
     private int numberOfTerm = 1;
-    
+    private double weight=0.0;
     
     public Posting(Document document) {
         this.document = document;
@@ -18,32 +18,22 @@ public class Posting implements Comparable<Posting>{
         this.term = term;
         this.document = document;
     }
+
+    Posting() {
+    }
     
 
-    /**
-     * @return the document
-     */
     public Document getDocument() {
         return document;
     }
-
-    /**
-     * @param document the document to set
-     */
-    public void setDocument(Document document) {
+ void setDocument(Document document) {
         this.document = document;
     }
 
-    /**
-     * @return the term
-     */
     public String getTerm() {
         return term;
     }
 
-    /**
-     * @param term the term to set
-     */
     public void setTerm(String term) {
         this.term = term;
     }
@@ -53,18 +43,19 @@ public class Posting implements Comparable<Posting>{
         return term.compareToIgnoreCase(posting.getTerm());
     }
 
-    /**
-     * @return the numberOfTerm
-     */
+   
     public int getNumberOfTerm() {
         return numberOfTerm;
     }
-
-    /**
-     * @param numberOfTerm the numberOfTerm to set
-     */
+    
     public void setNumberOfTerm(int numberOfTerm) {
         this.numberOfTerm = numberOfTerm;
     }
     
+    public double getWeight() {
+        return weight;
+}
+    public void setWeight(double weight) {
+        this.weight = weight;
+}
 }
