@@ -400,6 +400,45 @@ public class InvertedIndex {
             return result;
         }
     }
+    
+    /**
+     * Fungsi untuk membuat posting list dari suatu query
+     */
+    
+        public ArrayList<Posting> getQueryPosting(String query){
+            //panggil class dokumen
+        Document doc = new Document();
+        doc.setContent(query);
+        //buat posting list dengan query
+        ArrayList<Posting> result = doc.getListofPosting();
+        for (int i = 0; i < result.size(); i++) {
+            // hitung weight = tf * idf
+            double weight = result.get(i).getNumberOfTerm() * getInverseDocumentFrequency(result.get(i).getTerm());
+            // hasil dari weight
+            result.get(i).setWeight(weight);
+        }
+
+        return result;
+    }
+
+    /**
+     *
+     * @param postlist1 posting list1
+     * @param postlist2 posting list2
+     * @return hasil perkalian 2 buah postinglist
+     */
+    public double getInnerProduct(ArrayList<Posting> postlist1, ArrayList<Posting> postlist2) {
+        double result = 0;
+        for (int i = 0; i < postlist1.size(); i++) {
+            int pos = Collections.binarySearch(postlist2, postlist1.get(i));
+            if (pos >= 0) {
+                result = result + (postlist1.get(i).getWeight() * postlist2.get(pos).getWeight());
+            }
+        }
+
+        return result;
+    }
+
 
 
 }
