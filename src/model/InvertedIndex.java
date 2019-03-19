@@ -438,7 +438,65 @@ public class InvertedIndex {
 
         return result;
     }
-
-
+    
+    //mencari panjang dokumen
+    public double getLengthOfPosting(ArrayList<Posting> posting) {
+        //membuat variabel penyimpanan posting sementara
+        double tempPost = 0;
+        // lakukan perulangan sepanjang posting
+        for (int i = 0; i < posting.size(); i++) {
+            tempPost += Math.pow(posting.get(i).getWeight(), 2);
+        }
+        //lakukan perhitungan matematikanya.
+        return Math.sqrt(tempPost);
+    }
+    
+    // membuat kelas untuk menghitung nilai cosines similarity
+    public double getCosineSimilarity(ArrayList<Posting> posting, ArrayList<Posting> posting1) {
+        // membuat variabel untuk memanggil nilai inner produk
+        double innerProduct = getInnerProduct(posting, posting1);
+        double hasil = 0;
+        // menghitung nilai cosines
+        hasil = innerProduct / (getLengthOfPosting(posting) * getLengthOfPosting(posting1));
+        return hasil;
+    }
+    
+    //membuat kelas search TFIDF
+    public ArrayList<SearchingResult> searchTFIDF(String query) {
+        // membuat arraylist baru untuk menampung hasil search
+        ArrayList<SearchingResult> result = new ArrayList<SearchingResult>();
+        ArrayList<Posting> queryPost = this.getQueryPosting(query);
+        
+        // perulangan untuk melakukan pengecekan dokumen bedasarkan query. 
+        for (int i = 1; i <= listOfDocument.size(); i++) {
+            ArrayList<Posting> tempDoc = this.makeTFIDF(i);
+            double  innerProduct = this.getInnerProduct(queryPost, tempDoc);
+            SearchingResult doc = new SearchingResult(innerProduct, tempDoc.get(i-1).getDocument());
+            result.add(doc);
+        }
+        // jika query yang dicari ketemu, maka hasilnya di ranking
+        Collections.sort(result);
+        Collections.reverse(result);
+        return result;
+    }
+    
+    //membuat kelas search Cosines Similarity
+    public ArrayList<SearchingResult> searchCosineSimilarity(String query) {
+        // membuat arraylist baru untuk menampung hasil search 
+        ArrayList<SearchingResult> result = new ArrayList<SearchingResult>();
+        ArrayList<Posting> queryPost = this.getQueryPosting(query);
+        
+        // perulangan untuk melakukan pengecekan dokumen berdasarkan query
+        for (int i = 1; i <= listOfDocument.size(); i++) {
+            ArrayList<Posting> tempDoc = this.makeTFIDF(i);
+            double similarity = this.getCosineSimilarity(queryPost, tempDoc);
+            SearchingResult doc = new SearchingResult(similarity,tempDoc.get(i-1).getDocument());
+            result.add(doc);
+        }
+        // jika query yang dicari ketemu, maka hasilnya akan di ranking.
+        Collections.sort(result);
+        Collections.reverse(result);
+        return result;
+}
 
 }
